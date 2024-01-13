@@ -27,6 +27,7 @@ class MainViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(BannerCollectionViewCell.self, forCellWithReuseIdentifier: BannerCollectionViewCell.bannerCellIdentifier)
         return collectionView
     }()
@@ -37,6 +38,8 @@ class MainViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.showsHorizontalScrollIndicator = false 
+        collection.backgroundColor = .clear
         collection.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.identifier)
         return collection
     }()
@@ -75,6 +78,7 @@ extension MainViewController {
         mainTable.dataSource = self
         mainTable.delegate = self
         setUpConstraints()
+        categoryCollectionView.allowsMultipleSelection = false
     }
     
     private func setUpConstraints() {
@@ -106,6 +110,7 @@ extension MainViewController {
 }
 
 extension MainViewController: MainViewProtocol {
+    
     func success() {
         mainTable.reloadData()
     }
@@ -118,8 +123,9 @@ extension MainViewController: MainViewProtocol {
 //MARK: -categoryCollectionView data source methods-
 extension MainViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.bannerCollectionView {
             return 2
@@ -153,18 +159,6 @@ extension MainViewController: UICollectionViewDataSource {
 
 //MARK: -UICollectionViewDelegateFlowLayout methods-
 extension MainViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.bannerCollectionView {
-            
-        } else if collectionView == self.categoryCollectionView {
-            let cell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell
-            cell?.nameLabel.backgroundColor = UIColor(red: 0.992, green: 0.227, blue: 0.412, alpha: 0.2)
-            cell?.nameLabel.font = UIFont(name: "SFUIDisplay-Bold", size: 13)
-            cell?.nameLabel.layer.borderWidth = 0
-            cell?.nameLabel.layer.cornerRadius = 20
-        }
-    }
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.bannerCollectionView {
             return CGSize(width: collectionView.frame.width, height: 112)
@@ -173,6 +167,27 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: width, height: 40)
         } else {
             fatalError("Unexpected collectionView")
+        }
+    }
+}
+
+//MARK: -UICollecitonViewDelegate-
+extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == self.categoryCollectionView {
+            if let cell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell {
+                let category = presenter.categories[indexPath.item]
+                presenter.didSelectCategory(category)
+                cell.setSelectedAppearance()
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if collectionView == self.categoryCollectionView {
+            if let cell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell {
+                cell.setDeselectedAppearance()
+            }
         }
     }
 }

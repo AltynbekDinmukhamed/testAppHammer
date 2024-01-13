@@ -34,10 +34,33 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        setDeselectedAppearance()
+    }
+    
     //MARK: -Functions-
     func configure(with name: String) {
         nameLabel.text = name
+        setDeselectedAppearance()
     }
+    
+    func setSelectedAppearance() {
+        nameLabel.backgroundColor = UIColor(red: 0.992, green: 0.227, blue: 0.412, alpha: 0.2)
+        nameLabel.font = UIFont(name: "SFUIDisplay-Bold", size: 13)
+        nameLabel.layer.borderWidth = 0
+        nameLabel.layer.cornerRadius = 20
+        nameLabel.clipsToBounds = true
+    }
+
+    func setDeselectedAppearance() {
+        nameLabel.backgroundColor = .clear
+        nameLabel.font = UIFont(name: "SFUIDisplay-Regular", size: 13)
+        nameLabel.layer.borderWidth = 1
+        nameLabel.layer.borderColor = UIColor(red: 0.992, green: 0.227, blue: 0.412, alpha: 1).cgColor
+        nameLabel.layer.cornerRadius = 20
+        nameLabel.clipsToBounds = true
+   }
 }
 
 //MARK: -SetUpViews-

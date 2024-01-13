@@ -1,15 +1,15 @@
 //
-//  DetailViewController.swift
+//  ProfileViewController.swift
 //  testAppHammer
 //
-//  Created by Димаш Алтынбек on 12.01.2024.
+//  Created by Димаш Алтынбек on 14.01.2024.
 //
 
 import Foundation
 import UIKit
 import SnapKit
 
-class DetailViewController: UIViewController  {
+class ProfileViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()

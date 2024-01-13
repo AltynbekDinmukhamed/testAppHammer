@@ -20,6 +20,7 @@ protocol MainViewPresenterProtocol: AnyObject {
     init(view: MainViewProtocol, networkService: NetworkServiceProtocol)
     func getFoodItems()
     func getFoodItems(forCategory category: String)
+    func didSelectCategory(_ category: String)
 }
 
 class MainViewPresenter: MainViewPresenterProtocol {
@@ -56,6 +57,20 @@ class MainViewPresenter: MainViewPresenterProtocol {
     
     func getFoodItems(forCategory category: String) {
         // Implement fetching logic for specific categories
+    }
+    
+    func didSelectCategory(_ category: String) {
+        networkService.fetchFoods(query: category) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let foodItems):
+                    self?.foodItems = foodItems
+                    self?.view?.success()
+                case .failure(let error):
+                    self?.view?.failure(error: error)
+                }
+            }
+        }
     }
 }
 

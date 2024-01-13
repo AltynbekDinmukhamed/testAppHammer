@@ -24,6 +24,8 @@ class FoodItemTableViewCell: UITableViewCell {
     let titleLbl: UILabel = {
         let lbl = UILabel()
         lbl.textColor = UIColor(red: 0.133, green: 0.157, blue: 0.192, alpha: 1)
+        lbl.numberOfLines = 0
+        lbl.lineBreakMode = .byWordWrapping
         lbl.font = UIFont(name: "SFUIDisplay-Semibold", size: 17)
         return lbl
     }()
@@ -104,8 +106,9 @@ extension FoodItemTableViewCell {
         }
         
         titleLbl.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(32)
+            make.top.equalToSuperview().offset(27)
             make.leading.equalTo(goodImage.snp.trailing).offset(32)
+            make.trailing.equalToSuperview().offset(-16)
         }
         
         descriptionLbl.snp.makeConstraints { make in
