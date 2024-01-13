@@ -32,6 +32,9 @@
 		56B68A5E2B5288DC003A3CB0 /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B68A5D2B5288DC003A3CB0 /* BannerCollectionViewCell.swift */; };
 		56B68A612B530E48003A3CB0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B68A602B530E48003A3CB0 /* ProfileViewController.swift */; };
 		56B68A632B530E60003A3CB0 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B68A622B530E60003A3CB0 /* CartViewController.swift */; };
+		56B68A692B53192B003A3CB0 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B68A662B53192B003A3CB0 /* 1.png */; };
+		56B68A6A2B53192B003A3CB0 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B68A672B53192B003A3CB0 /* 3.png */; };
+		56B68A6B2B53192B003A3CB0 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 56B68A682B53192B003A3CB0 /* 2.png */; };
 		7C5B234396A1F5C4CAD5E97D /* Pods_testAppHammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6E6940D645303D84E10490 /* Pods_testAppHammer.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +66,10 @@
 		56B68A5D2B5288DC003A3CB0 /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		56B68A602B530E48003A3CB0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		56B68A622B530E60003A3CB0 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		56B68A642B5317B0003A3CB0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		56B68A662B53192B003A3CB0 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		56B68A672B53192B003A3CB0 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		56B68A682B53192B003A3CB0 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		CE6E6940D645303D84E10490 /* Pods_testAppHammer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testAppHammer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E07E7875E1B126D66BDE8D31 /* Pods-testAppHammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testAppHammer.debug.xcconfig"; path = "Target Support Files/Pods-testAppHammer/Pods-testAppHammer.debug.xcconfig"; sourceTree = "<group>"; };
 		EA021BB322AEA52A1FE9514B /* Pods-testAppHammer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testAppHammer.release.xcconfig"; path = "Target Support Files/Pods-testAppHammer/Pods-testAppHammer.release.xcconfig"; sourceTree = "<group>"; };
@@ -100,6 +107,8 @@
 		56B68A122B519580003A3CB0 = {
 			isa = PBXGroup;
 			children = (
+				56B68A652B531917003A3CB0 /* screenshots */,
+				56B68A642B5317B0003A3CB0 /* README.md */,
 				56B68A1D2B519580003A3CB0 /* testAppHammer */,
 				56B68A1C2B519580003A3CB0 /* Products */,
 				3B956F51A719BDBC543E8F82 /* Pods */,
@@ -228,6 +237,16 @@
 			path = ControllersForTabBar;
 			sourceTree = "<group>";
 		};
+		56B68A652B531917003A3CB0 /* screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				56B68A662B53192B003A3CB0 /* 1.png */,
+				56B68A682B53192B003A3CB0 /* 2.png */,
+				56B68A672B53192B003A3CB0 /* 3.png */,
+			);
+			path = screenshots;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -294,6 +313,9 @@
 				56B68A5B2B5284C7003A3CB0 /* SFUIDisplay-Semibold.otf in Resources */,
 				56B68A5C2B5284C7003A3CB0 /* SFUIDisplay-Bold.otf in Resources */,
 				56B68A5A2B5284C7003A3CB0 /* SFUIDisplay-Regular.ttf in Resources */,
+				56B68A692B53192B003A3CB0 /* 1.png in Resources */,
+				56B68A6A2B53192B003A3CB0 /* 3.png in Resources */,
+				56B68A6B2B53192B003A3CB0 /* 2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
