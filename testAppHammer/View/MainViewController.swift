@@ -31,6 +31,8 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     
+    private var categoryCollectionViewTopConstraint: Constraint?
+    
     let categoryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -43,7 +45,7 @@ class MainViewController: UIViewController {
         let table = UITableView()
         table.backgroundColor = .white
         table.layer.cornerRadius = 20
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        table.register(FoodItemTableViewCell.self, forCellReuseIdentifier: "Cell")
         return table
     }()
     //MARK: -LifeCycle-
@@ -88,8 +90,9 @@ extension MainViewController {
             make.height.equalTo(112)
         }
         
+        categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
         categoryCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(bannerCollectionView.snp.bottom).offset(24)
+            self.categoryCollectionViewTopConstraint = make.top.equalTo(bannerCollectionView.snp.bottom).offset(24).constraint
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
             make.height.equalTo(40)
@@ -181,18 +184,47 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? FoodItemTableViewCell else {
+            fatalError("Error while using dequeueReusableCell of tableView")
+        }
         if let foodItem = presenter.foodItems?[indexPath.row] {
-            cell.textLabel?.text = foodItem.label
+            cell.configure(with: foodItem)
         }
         return cell
     }
-    
-    
 }
 //MARK: -MainTable delegate methods-
-extension MainViewController: UITableViewDelegate {
+extension MainViewController: UITableViewDelegate, UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let hideBannerOffset: CGFloat = bannerCollectionView.frame.maxY
+        if scrollView.contentOffset.y > hideBannerOffset {
+            if !bannerCollectionView.isHidden {
+                bannerCollectionView.isHidden = true
+                categoryCollectionViewTopConstraint?.deactivate()
+                categoryCollectionView.snp.makeConstraints { make in
+                    self.categoryCollectionViewTopConstraint = make.top.equalTo(citySelectorButton.snp.bottom).offset(24).constraint
+                }
+                UIView.animate(withDuration: 0.3) {
+                    self.view.layoutIfNeeded()
+                }
+            }
+        } else {
+            if bannerCollectionView.isHidden {
+                bannerCollectionView.isHidden = false
+                categoryCollectionViewTopConstraint?.deactivate()
+                categoryCollectionView.snp.makeConstraints { make in
+                    self.categoryCollectionViewTopConstraint = make.top.equalTo(bannerCollectionView.snp.bottom).offset(24).constraint
+                }
+                UIView.animate(withDuration: 0.3) {
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
+    }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 172
+    }
 }
 
 extension MainViewController {
